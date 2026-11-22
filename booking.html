@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ticket - IPL Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="logo">🏏 IPL Portal</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="matches.html">Matches</a></li>
+            <li><a href="booking.html">Book Ticket</a></li>
+            <li><a href="#">My Bookings</a></li>
+            <li><a href="#">Guidelines</a></li>
+        </ul>
+    </nav>
+
+    <!-- BOOKING SECTION -->
+    <main style="padding-top: 120px;">
+        <h2 style="text-align: center; margin-bottom: 20px;">Book Your Ticket</h2>
+        
+        <div class="grid-layout">
+            
+            <!-- Left Side: Form -->
+            <div class="form-card">
+                <h3>Ticket Details</h3>
+                <form id="bookingForm">
+                    <label>Name</label>
+                    <input type="text" id="nameInput" placeholder="Enter your name">
+
+                    <label>Number of Tickets</label>
+                    <input type="number" id="ticketInput" value="1" min="1" max="10">
+
+                    <label>Stand</label>
+                    <select id="standInput">
+                        <option value="1000">General Stand (₹1000)</option>
+                        <option value="2500">Premium Stand (₹2500)</option>
+                        <option value="5000">VIP Stand (₹5000)</option>
+                    </select>
+
+                    <label>Venue</label>
+                    <input type="text" id="venueInput" placeholder="e.g. Wankhede Stadium">
+                </form>
+            </div>
+
+            <!-- Right Side: Summary -->
+            <div class="summary-card">
+                <h3 style="color: #0a192f; margin-bottom: 20px;">Booking Summary</h3>
+                
+                <div class="summary-row">
+                    <span>Name:</span> <strong id="sumName">-</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Tickets:</span> <strong id="sumTickets">1</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Stand:</span> <strong id="sumStand">General Stand</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Venue:</span> <strong id="sumVenue">-</strong>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+                
+                <h3 style="color: #e21d24; display: flex; justify-content: space-between; margin-bottom: 20px;">
+                    <span>Total Amount:</span>
+                    <span>₹<span id="sumTotal">1000</span></span>
+                </h3>
+
+                <!-- FINAL BOOK BUTTON -->
+                <button class="btn btn-primary" style="width: 100%; font-size: 16px;" onclick="confirmBooking()">Book Ticket</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 IPL Ticket Booking Portal | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // LIVE SUMMARY UPDATE
+        const nameInput = document.getElementById('nameInput');
+        const ticketInput = document.getElementById('ticketInput');
+        const standInput = document.getElementById('standInput');
+        const venueInput = document.getElementById('venueInput');
+
+        const sumName = document.getElementById('sumName');
+        const sumTickets = document.getElementById('sumTickets');
+        const sumStand = document.getElementById('sumStand');
+        const sumVenue = document.getElementById('sumVenue');
+        const sumTotal = document.getElementById('sumTotal');
+
+        function updateSummary() {
+            sumName.innerText = nameInput.value || '-';
+            sumVenue.innerText = venueInput.value || '-';
+            
+            let tickets = parseInt(ticketInput.value) || 1;
+            sumTickets.innerText = tickets;
+            
+            let selectedStandText = standInput.options[standInput.selectedIndex].text;
+            sumStand.innerText = selectedStandText.split('(')[0].trim();
+
+            let standPrice = parseInt(standInput.value);
+            sumTotal.innerText = standPrice * tickets;
+        }
+
+        nameInput.addEventListener('input', updateSummary);
+        ticketInput.addEventListener('input', updateSummary);
+        standInput.addEventListener('change', updateSummary);
+        venueInput.addEventListener('input', updateSummary);
+
+        updateSummary();
+
+        // SUCCESS MESSAGE ON FINAL CLICK
+        function confirmBooking() {
+            let name = document.getElementById('nameInput').value;
+            
+            if (name.trim() === "") {
+                alert("Please enter your name before booking.");
+                return;
+            }
+
+            // Show the success message
+            alert("🎉 Ticket Booked Successfully!");
+            
+            // Optional: Reset form after booking
+            document.getElementById('bookingForm').reset();
+            updateSummary();
+        }
+    </script>
+</body>
+</html>

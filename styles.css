@@ -1,12 +1,13 @@
-/* 1. CSS VARIABLES FOR THEME */
+/* =========================================
+   1. CSS VARIABLES & BASICS
+   ========================================= */
 :root {
-    --primary: #0b1a30;    /* Dark Blue */
-    --accent: #0dc7f5;     /* Light Blue */
-    --background: #f4f6f9; /* Light Grey */
-    --text: #333333;       /* Dark Grey */
+    --primary: #0a192f;
+    --accent: #ffd700;
+    --background: #f4f6f9;
+    --text: #333333;
 }
 
-/* 2. CSS BASICS (Box Model & Typography) */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,14 +15,21 @@
     font-family: Arial, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--background);
     color: var(--text);
+    padding-bottom: 20px;
 }
 
-/* 3. STYLE THE NAVIGATION BAR (Fixed & Hover) */
+/* =========================================
+   2. NAVIGATION BAR (Fixed & Flexbox)
+   ========================================= */
 nav {
-    position: fixed; /* Makes it stay at the top */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -30,7 +38,14 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000; /* Keeps it above everything else */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 nav ul {
@@ -46,18 +61,18 @@ nav a {
     transition: color 0.3s;
 }
 
-/* HOVER EFFECT */
 nav a:hover {
-    color: var(--accent); /* Changes to light blue on hover */
+    color: var(--accent);
 }
 
-/* 4. STYLE THE HERO SECTION (Gradient) */
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
 .hero {
-    background: linear-gradient(135deg, var(--primary), #1e40af); /* Gradient */
+    background: linear-gradient(135deg, var(--primary), #1e40af);
     color: white;
     text-align: center;
-    padding: 120px 20px 80px 20px; /* Extra top padding so navbar doesn't cover it */
-    margin-top: 60px; /* Pushes it below the fixed navbar */
+    padding: 150px 20px 80px 20px;
 }
 
 .hero h1 {
@@ -70,7 +85,6 @@ nav a:hover {
     margin-bottom: 30px;
 }
 
-/* Hero Buttons */
 .hero-buttons {
     display: flex;
     justify-content: center;
@@ -83,11 +97,18 @@ nav a:hover {
     font-weight: bold;
     border-radius: 5px;
     transition: transform 0.2s;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-primary {
     background-color: var(--accent);
     color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #e6c200;
+    transform: scale(1.05);
 }
 
 .btn-secondary {
@@ -96,26 +117,43 @@ nav a:hover {
     border: 2px solid white;
 }
 
-.btn:hover {
+.btn-secondary:hover {
+    background-color: rgba(255,255,255,0.1);
     transform: scale(1.05);
 }
 
-/* General Page Layout */
+/* =========================================
+   4. MAIN CONTENT & TABLES
+   ========================================= */
 main {
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 0 auto;
     padding: 20px;
 }
 
-section {
+main section {
     background: white;
-    padding: 25px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
 }
-html {
-    scroll-behavior: smooth; /* THIS MAKES IT SCROLL SMOOTHLY */
+
+main h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+main ul {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+.table-wrapper {
+    overflow-x: auto;
 }
 
 table {
@@ -128,8 +166,8 @@ table {
 }
 
 th {
-    background-color: #0a192f; /* Dark Blue */
-    color: #ffd700; /* Gold */
+    background-color: var(--primary);
+    color: var(--accent);
     padding: 15px;
     text-align: left;
 }
@@ -140,36 +178,99 @@ td {
     background-color: white;
 }
 
-form {
-    background: white;
-    padding: 20px;
+/* =========================================
+   5. GRID LAYOUT & FORMS (Booking Page)
+   ========================================= */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.form-card, .summary-card {
+    background: #ffffff;
+    padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.form-card {
+    border-top: 5px solid var(--primary);
+}
+
+.summary-card {
+    border-top: 5px solid var(--accent);
+    background: #fdfdfd;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+form input:focus, form select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(10, 25, 47, 0.2);
+}
+
+.summary-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 15px;
+    color: #555;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 8px;
 }
 
-input, select {
-    padding: 10px 15px;
-    border: 2px solid #cbd5e1;
-    border-radius: 6px;
+.summary-row strong {
+    color: var(--primary);
 }
 
-main section {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
-}
-
+/* =========================================
+   6. FOOTER
+   ========================================= */
 footer {
-    background-color: #0a192f; /* Dark Blue */
-    color: #ffd700; /* Gold */
+    background-color: var(--primary);
+    color: var(--accent);
     text-align: center;
     padding: 25px;
     margin-top: 40px;
-    border-top: 4px solid #ffd700; 
+    border-top: 4px solid var(--accent);
     font-weight: bold;
+}
+
+/* =========================================
+   7. RESPONSIVE DESIGN (Mobile View)
+   ========================================= */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
 }

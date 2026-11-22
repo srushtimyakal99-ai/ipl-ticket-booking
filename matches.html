@@ -3,201 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matches - IPL Booking</title>
-    <!-- LINKED CSS FILE -->
+    <title>Matches - IPL Portal</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Extra CSS specifically for the table and filter to look nice -->
-    <style>
-        .filter-form {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .filter-form select, .filter-form button {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-
-        .filter-form button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .filter-form button:hover {
-            background-color: #1e40af;
-        }
-
-        .table-wrapper {
-            overflow-x: auto; /* Makes table scroll on mobile */
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .book-btn {
-            background-color: #e21d24;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .book-btn:hover {
-            background-color: #c6161c;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- NAVIGATION BAR (Matches index.html) -->
+    <!-- NAVIGATION BAR -->
     <nav>
-        <div style="color: white; font-size: 1.5rem; font-weight: bold;">🏏 IPL Portal</div>
+        <div class="logo">🏏 IPL Portal</div>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="Matches.html">Matches</a></li>
-            <li><a href="#">Book Ticket</a></li>
+            <li><a href="matches.html">Matches</a></li>
+            <li><a href="booking.html">Book Ticket</a></li>
             <li><a href="#">My Bookings</a></li>
             <li><a href="#">Guidelines</a></li>
         </ul>
     </nav>
 
-    <!-- MAIN CONTENT -->
-    <main style="margin-top: 100px;"> <!-- Added margin-top to clear fixed navbar -->
-        
+    <main style="padding-top: 120px;">
         <section>
             <h2>Match Schedule</h2>
-            <p>Select your favourite team and book your tickets.</p>
-
-            <!-- FILTER FORM -->
-            <form class="filter-form">
+            
+            <form class="filter-form-class" style="margin-bottom: 20px;">
                 <label for="teamFilter">Filter by Team:</label>
                 <select id="teamFilter">
                     <option value="all">All Teams</option>
-                    <option value="CSK">Chennai Super Kings (CSK)</option>
-                    <option value="MI">Mumbai Indians (MI)</option>
-                    <option value="RCB">Royal Challengers Bangalore (RCB)</option>
-                    <option value="KKR">Kolkata Knight Riders (KKR)</option>
+                    <option value="CSK">Chennai Super Kings</option>
+                    <option value="MI">Mumbai Indians</option>
+                    <option value="RCB">Royal Challengers Bangalore</option>
                 </select>
-                <button type="button" onclick="filterMatches()">Apply Filter</button>
-                <button type="button" onclick="showAll()">Show All</button>
+                <button type="button" class="btn btn-primary" onclick="filterMatches()">Apply Filter</button>
+                <button type="button" class="btn btn-primary" onclick="showAll()" style="background-color: gray;">Show All</button>
             </form>
 
-            <!-- TABLE -->
             <div class="table-wrapper">
-                <table>
-                    <caption style="margin-bottom: 10px; font-weight: bold;">Upcoming Sample Matches</caption>
+                <table id="matchTable">
                     <thead>
                         <tr>
                             <th>Match No.</th>
                             <th>Teams</th>
-                            <th>Date / Time</th>
+                            <th>Date/Time</th>
                             <th>Venue</th>
-                            <th>Prices (₹)</th>
-                            <th>Seats Available</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="matchTable">
-                        <!-- Match 1 -->
+                    <tbody>
                         <tr>
                             <td>27a</td>
                             <td>CSK-MI</td>
-                            <td>27-Oct-26 / 6:30 PM</td>
+                            <td>27-Oct-26 6:30PM</td>
                             <td>Chinnaswamy</td>
-                            <td>1000 - 5000</td>
-                            <td>7200</td>
-                            <td><button class="book-btn" onclick="bookMatch('27a')">Book</button></td>
+                            <td><a href="booking.html" class="btn btn-primary" style="padding: 5px 10px; font-size: 14px;">Book</a></td>
                         </tr>
-                        <!-- Match 2 -->
                         <tr>
                             <td>28b</td>
-                            <td>RCB-KKR</td>
-                            <td>29-Oct-26 / 7:30 PM</td>
+                            <td>RCB-MI</td>
+                            <td>29-Oct-26 7:30PM</td>
                             <td>Wankhede</td>
-                            <td>1200 - 6000</td>
-                            <td>5100</td>
-                            <td><button class="book-btn" onclick="bookMatch('28b')">Book</button></td>
+                            <td><a href="booking.html" class="btn btn-primary" style="padding: 5px 10px; font-size: 14px;">Book</a></td>
                         </tr>
-                        <!-- Match 3 -->
                         <tr>
                             <td>29c</td>
                             <td>CSK-RCB</td>
-                            <td>31-Oct-26 / 6:30 PM</td>
+                            <td>31-Oct-26 6:30PM</td>
                             <td>Chepauk</td>
-                            <td>900 - 4500</td>
-                            <td>8400</td>
-                            <td><button class="book-btn" onclick="bookMatch('29c')">Book</button></td>
+                            <td><a href="booking.html" class="btn btn-primary" style="padding: 5px 10px; font-size: 14px;">Book</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
-
     </main>
 
-    <!-- JAVASCRIPT FOR FILTERING -->
+    <footer>
+        <p>&copy; 2026 IPL Ticket Booking Portal | All Rights Reserved</p>
+    </footer>
+
     <script>
         function filterMatches() {
             var team = document.getElementById("teamFilter").value;
-            var rows = document.getElementById("matchTable").getElementsByTagName("tr");
-
+            var rows = document.getElementById("matchTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
             for (var i = 0; i < rows.length; i++) {
                 var teamsText = rows[i].cells[1].innerText;
-                
-                // If 'all' is selected OR the row contains the team name, show it
-                if (team === "all" || teamsText.includes(team)) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
-                }
+                rows[i].style.display = (team === "all" || teamsText.includes(team)) ? "" : "none";
             }
         }
-
         function showAll() {
-            var rows = document.getElementById("matchTable").getElementsByTagName("tr");
-            for (var i = 0; i < rows.length; i++) {
-                rows[i].style.display = ""; // Show all rows
-            }
-            document.getElementById("teamFilter").value = "all"; // Reset dropdown
-        }
-
-        function bookMatch(matchNo) {
-            alert("You selected Match No: " + matchNo + ". Proceeding to booking...");
-            // In the future, you can change this to redirect to your booking page:
-            // window.location.href = "matches.bookbutton.html";
+            var rows = document.getElementById("matchTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+            for (var i = 0; i < rows.length; i++) { rows[i].style.display = ""; }
+            document.getElementById("teamFilter").value = "all";
         }
     </script>
-    <footer>
-    <p>&copy; 2026 IPL Ticket Booking Portal | All Rights Reserved</p>
-</footer>
-
 </body>
 </html>
