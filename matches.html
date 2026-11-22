@@ -20,11 +20,11 @@
         </ul>
     </nav>
 
-    <main style="padding-top: 120px;">
+    <main class="page-content">
         <section>
             <h2>Match Schedule</h2>
             
-            <form class="filter-form-class" style="margin-bottom: 20px;">
+            <form class="filter-form-class">
                 <label for="teamFilter">Filter by Team:</label>
                 <select id="teamFilter">
                     <option value="all">All Teams</option>
@@ -36,6 +36,7 @@
                 <button type="button" class="btn btn-primary" onclick="showAll()" style="background-color: gray;">Show All</button>
             </form>
 
+            <!-- TABLE WRAPPER FOR HORIZONTAL SCROLL ON MOBILE -->
             <div class="table-wrapper">
                 <table id="matchTable">
                     <thead>

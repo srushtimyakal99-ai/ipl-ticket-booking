@@ -21,7 +21,7 @@
     </nav>
 
     <!-- BOOKING SECTION -->
-    <main style="padding-top: 120px;">
+    <main class="page-content">
         <h2 style="text-align: center; margin-bottom: 20px;">Book Your Ticket</h2>
         
         <div class="grid-layout">
@@ -117,7 +117,7 @@
 
         updateSummary();
 
-        // SUCCESS MESSAGE ON FINAL CLICK
+        // SUCCESS MESSAGE & VALIDATION
         function confirmBooking() {
             let name = document.getElementById('nameInput').value;
             
@@ -126,10 +126,7 @@
                 return;
             }
 
-            // Show the success message
             alert("🎉 Ticket Booked Successfully!");
-            
-            // Optional: Reset form after booking
             document.getElementById('bookingForm').reset();
             updateSummary();
         }

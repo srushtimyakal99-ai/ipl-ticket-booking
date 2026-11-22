@@ -26,7 +26,7 @@ body {
 }
 
 /* =========================================
-   2. NAVIGATION BAR (Fixed & Flexbox)
+   2. NAVIGATION BAR
    ========================================= */
 nav {
     position: fixed;
@@ -91,6 +91,9 @@ nav a:hover {
     gap: 15px;
 }
 
+/* =========================================
+   4. BUTTONS
+   ========================================= */
 .btn {
     padding: 12px 24px;
     text-decoration: none;
@@ -99,6 +102,7 @@ nav a:hover {
     transition: transform 0.2s;
     border: none;
     cursor: pointer;
+    display: inline-block;
 }
 
 .btn-primary {
@@ -123,12 +127,16 @@ nav a:hover {
 }
 
 /* =========================================
-   4. MAIN CONTENT & TABLES
+   5. MAIN CONTENT & TABLES
    ========================================= */
 main {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.page-content {
+    padding-top: 120px; /* Space for fixed navbar */
 }
 
 main section {
@@ -152,8 +160,10 @@ main ul {
     line-height: 1.8;
 }
 
+/* Table Styles */
 .table-wrapper {
-    overflow-x: auto;
+    overflow-x: auto; /* HORIZONTAL SCROLL FOR MOBILE */
+    width: 100%;
 }
 
 table {
@@ -170,6 +180,7 @@ th {
     color: var(--accent);
     padding: 15px;
     text-align: left;
+    white-space: nowrap; /* Prevents headers from squishing */
 }
 
 td {
@@ -179,7 +190,7 @@ td {
 }
 
 /* =========================================
-   5. GRID LAYOUT & FORMS (Booking Page)
+   6. GRID LAYOUT & FORMS (Booking Page)
    ========================================= */
 .grid-layout {
     display: grid;
@@ -196,14 +207,8 @@ td {
     border: 1px solid #e2e8f0;
 }
 
-.form-card {
-    border-top: 5px solid var(--primary);
-}
-
-.summary-card {
-    border-top: 5px solid var(--accent);
-    background: #fdfdfd;
-}
+.form-card { border-top: 5px solid var(--primary); }
+.summary-card { border-top: 5px solid var(--accent); background: #fdfdfd; }
 
 form label {
     display: block;
@@ -240,12 +245,19 @@ form input:focus, form select:focus {
     padding-bottom: 8px;
 }
 
-.summary-row strong {
-    color: var(--primary);
+.summary-row strong { color: var(--primary); }
+
+/* Filter Form Alignment */
+.filter-form-class {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 /* =========================================
-   6. FOOTER
+   7. FOOTER
    ========================================= */
 footer {
     background-color: var(--primary);
@@ -258,19 +270,59 @@ footer {
 }
 
 /* =========================================
-   7. RESPONSIVE DESIGN (Mobile View)
+   8. ASS-8: RESPONSIVE DESIGN (Media Queries)
    ========================================= */
+
+/* TABLET VIEW (Less than 768px) */
 @media (max-width: 768px) {
+    /* Stack Navbar */
     nav {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
+        padding: 15px;
     }
-    
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Stack Grid (Form & Summary) */
     .grid-layout {
         grid-template-columns: 1fr;
     }
 
+    .hero {
+        padding-top: 200px;
+    }
+
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+}
+
+/* MOBILE VIEW (Less than 480px) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Stack Buttons */
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    main section, .form-card, .summary-card {
+        padding: 15px;
     }
 }
