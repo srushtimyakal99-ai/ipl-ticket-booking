@@ -136,7 +136,7 @@ main {
 }
 
 .page-content {
-    padding-top: 120px; /* Space for fixed navbar */
+    padding-top: 120px;
 }
 
 main section {
@@ -180,7 +180,7 @@ th {
     color: var(--accent);
     padding: 15px;
     text-align: left;
-    white-space: nowrap; /* Prevents headers from squishing */
+    white-space: nowrap;
 }
 
 td {
@@ -273,7 +273,7 @@ footer {
    8. ASS-8: RESPONSIVE DESIGN (Media Queries)
    ========================================= */
 
-/* TABLET VIEW (Less than 768px) */
+/* TABLET & MOBILE VIEW (Less than 768px) */
 @media (max-width: 768px) {
     /* Stack Navbar */
     nav {
@@ -299,9 +299,22 @@ footer {
     .hero h1 {
         font-size: 2.2rem;
     }
+    
+    /* MOVED HERE: Buttons stack at tablet size now */
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
 }
 
-/* MOBILE VIEW (Less than 480px) */
+/* SMALL MOBILE VIEW (Less than 480px) */
 @media (max-width: 480px) {
     .hero h1 {
         font-size: 1.8rem;
@@ -311,18 +324,21 @@ footer {
         font-size: 1rem;
     }
 
-    /* Stack Buttons */
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
     main section, .form-card, .summary-card {
         padding: 15px;
     }
+}
+
+
+.error-msg {
+    color: #e21d24; /* Red error text */
+    font-size: 13px;
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.input-error {
+    border-color: #e21d24 !important; /* Red border */
+    background-color: #ffe6e6 !important; /* Light red background */
 }
